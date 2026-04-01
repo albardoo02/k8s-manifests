@@ -15,6 +15,8 @@ spec:
       labels:
         app: server-main
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: wk-02
       containers:
         - name: minecraft
           image: itzg/minecraft-server:java21
