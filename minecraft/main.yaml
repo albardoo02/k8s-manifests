@@ -39,7 +39,7 @@ spec:
             - name: server-data
               mountPath: /data
         - name: playit
-          image: playitgg/playit:latest
+          image: playit/playit:latest
           env:
             - name: PLAYIT_SECRET_KEY
               value: "playit_secret_here"
