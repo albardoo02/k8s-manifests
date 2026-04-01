@@ -54,8 +54,10 @@ kind: Service
 metadata:
   name: server-main-svc
 spec:
+  type: NodePort
   selector:
     app: server-main
   ports:
     - port: 25565
       targetPort: 25565
+      nodePort: 30065
