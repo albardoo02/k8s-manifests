@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-main
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-main
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: server-main
+    spec:
+      containers:
+        - name: minecraft
+          image: itzg/minecraft-server:java21
+          resources:
+            requests:
+              memory: "4Gi"
+          env:
+            - name: EULA
+              value: "TRUE"
+            - name: TYPE
+              value: "PAPER"
+            - name: VERSION
+              value: "LATEST"
+            - name: MEMORY
+              value: "4G"
+          ports:
+            - containerPort: 25565
+              name: minecraft
+          volumeMounts:
+            - name: server-data
+              mountPath: /data
+        - name: playit
+          image: playitgg/playit:latest
+          env:
+            - name: PAYIT_SECRET_KEY
+              value: "playit_secret_here"
+      volumes:
+        - name: server-data
+          hostPath:
+            path: /srv/minecraft
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-main-svc
+spec:
+  selector:
+    app: server-main
+  ports:
+    - port: 25565
+      targetPort: 25565
