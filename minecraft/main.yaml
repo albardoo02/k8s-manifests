@@ -41,7 +41,7 @@ spec:
         - name: playit
           image: playitgg/playit:latest
           env:
-            - name: PAYIT_SECRET_KEY
+            - name: PLAYIT_SECRET_KEY
               value: "playit_secret_here"
       volumes:
         - name: server-data
