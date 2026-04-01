@@ -39,17 +39,14 @@ spec:
             - name: server-data
               mountPath: /data
         - name: playit
-          image: dysta/playitgg:latest
+          image: playit/playit:0.4.3
           env:
             - name: PLAYIT_SECRET_KEY
               value: "YOUR_SECRET_KEY"
-          volumeMounts:
-            - name: playit-config
-              mountPath: /secrets
       volumes:
-        - name: playit-config
+        - name: server-data
           hostPath:
-            path: /srv/playit
+            path: /srv/minecraft
             type: DirectoryOrCreate
 ---
 apiVersion: v1
