@@ -40,9 +40,11 @@ spec:
               mountPath: /data
         - name: playit
           image: playitcloud/playit:0.15.19
+          command: ["/playit"]
+          args: ["run"] 
           env:
             - name: PLAYIT_SECRET_KEY
-              value: "YOUR_SECRET_KEY"
+              value: ""
       volumes:
         - name: server-data
           hostPath:
