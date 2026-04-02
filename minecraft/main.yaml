@@ -39,10 +39,13 @@ spec:
             - name: server-data
               mountPath: /data
         - name: playit
-          image: playitcloud/playit:0.15.19
+          image: ghcr.io/playit-cloud/playit-agent:latest
           env:
-            - name: PLAYIT_SECRET_KEY
-              value: ""
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: playit-auth # ステップ1で作った名前
+                  key: key
       volumes:
         - name: server-data
           hostPath:
