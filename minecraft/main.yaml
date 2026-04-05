@@ -48,11 +48,26 @@ spec:
                   key: key
         - name: filebrowser
           image: filebrowser/filebrowser:latest
-          args: 
+          command: ["/filebrowser"]
+          args:
+            - "config"
+            - "init"
+            - "--database"
+            - "/srv/filebrowser.db"
+            - "&&"
+            - "/filebrowser"
+            - "users"
+            - "add"
+            - "admin"
+            - "admin"
+            - "--perm.admin"
+            - "&&"
+            - "/filebrowser"
             - "--database"
             - "/srv/filebrowser.db"
             - "--root"
             - "/srv"
+            - "--noauth=false"
           ports:
             - containerPort: 80
               name: filebrowser
