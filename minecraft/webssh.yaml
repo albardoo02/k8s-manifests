@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webssh
+spec:
+  selector:
+    matchLabels:
+      app: webssh
+  template:
+    metadata:
+      labels:
+        app: webssh
+    spec:
+      containers:
+        - name: ttyd
+          image: tsl0922/ttyd:latest
+          ports:
+            - containerPort: 7681
+          command: ["ttyd", "-p", "7681", "login"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webssh-svc
+spec:
+  type: NodePort
+  selector:
+    app: webssh
+  ports:
+    - port: 7681
+      targetPort: 7681
+      nodePort: 30022
