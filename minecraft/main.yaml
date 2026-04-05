@@ -33,6 +33,8 @@ spec:
                 secretKeyRef:
                   name: mc-secrets
                   key: rcon-password
+            - name: RCON_PORT
+              value: "25575"
             - name: TYPE
               value: "PAPER"
             - name: VERSION
