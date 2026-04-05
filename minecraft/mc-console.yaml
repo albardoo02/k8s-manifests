@@ -11,7 +11,7 @@ spec:
       labels:
         app: mc-console
     spec:
-    containers:
+      containers:
       - name: web-rcon
         image: itzg/rcon-cli:latest
         env:
