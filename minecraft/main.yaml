@@ -70,6 +70,21 @@ spec:
           volumeMounts:
             - name: server-data
               mountPath: /srv
+        - name: web-rcon
+          image: itzg/rcon-web-admin:latest
+          env:
+            - name: RCON_HOST
+              value: "localhost"
+            - name: RCON_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mc-secrets
+                  key: rcon-password
+            - name: RCON_PORT
+              value: "25575"
+          ports:
+            - containerPort: 8080
+              name: rcon-web
       volumes:
         - name: server-data
           hostPath:
@@ -96,3 +111,6 @@ spec:
       targetPort: 80
       name: filebrowser
       nodePort: 30080
+    - port: 4321
+      targetPort: 8080
+      name: rcon-web
