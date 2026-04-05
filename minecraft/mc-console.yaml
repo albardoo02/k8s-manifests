@@ -11,9 +11,19 @@ spec:
       labels:
         app: mc-console
     spec:
-      containers:
+    containers:
       - name: web-rcon
         image: itzg/rcon-cli:latest
+        env:
+          - name: RCON_HOST
+            value: "server-main-svc"
+          - name: RCON_PORT
+            value: "25575"
+          - name: RCON_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mc-secrets
+                key: rcon-password
         ports:
         - containerPort: 4321
 ---
