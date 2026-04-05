@@ -19,19 +19,26 @@ spec:
         kubernetes.io/hostname: wk-02
       containers:
         - name: minecraft
-          image: itzg/minecraft-server:java21
+          image: itzg/minecraft-server:java25
           resources:
             requests:
-              memory: "4Gi"
+              memory: "8Gi"
           env:
             - name: EULA
               value: "TRUE"
+            - name: RCON_ENABLED
+              value: "true"
+            - name: RCON_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mc-secrets
+                  key: rcon-password
             - name: TYPE
               value: "PAPER"
             - name: VERSION
               value: "LATEST"
             - name: MEMORY
-              value: "4G"
+              value: "8G"
           ports:
             - containerPort: 25565
               name: minecraft
