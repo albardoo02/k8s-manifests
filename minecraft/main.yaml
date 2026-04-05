@@ -75,4 +75,9 @@ spec:
   ports:
     - port: 25565
       targetPort: 25565
+      name: minecraft
       nodePort: 30065
+    - port: 8080
+      targetPort: 80
+      name: filebrowser
+      nodePort: 30080
