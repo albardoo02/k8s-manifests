@@ -44,8 +44,19 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: playit-auth # ステップ1で作った名前
+                  name: playit-auth
                   key: key
+        - name: filebrowser
+          image: filebrowser/filebrowser:latest
+          ports:
+            - containerPort: 80
+              name: filebrowser
+          volumeMounts:
+            - name: server-data
+              mountPath: /srv
+          env:
+            - name: FB_BASEURL
+              value: "/filebrowser"
       volumes:
         - name: server-data
           hostPath:
