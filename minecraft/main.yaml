@@ -71,19 +71,19 @@ spec:
             - name: server-data
               mountPath: /srv
         - name: web-rcon
-          image: itzg/rcon-web-admin:latest
+          image: outplayed/mcrecon:latest
           env:
             - name: RCON_HOST
               value: "localhost"
-            - name: RCON_PASSWORD
+            - name: RCON_PORT
+              value: "25575"
+            - name: RCON_PASS
               valueFrom:
                 secretKeyRef:
                   name: mc-secrets
                   key: rcon-password
-            - name: RCON_PORT
-              value: "25575"
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               name: rcon-web
       volumes:
         - name: server-data
@@ -112,5 +112,5 @@ spec:
       name: filebrowser
       nodePort: 30080
     - port: 4321
-      targetPort: 8080
+      targetPort: 80
       name: rcon-web
